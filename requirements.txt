@@ -17,4 +17,6 @@ Flask
 Flask-Cors
 gdown
 kagglehub
+torchio
+opencv-python
 -e .
