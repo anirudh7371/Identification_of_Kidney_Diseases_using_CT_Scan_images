@@ -1,7 +1,7 @@
 from KidneyStoneClassification.constants import *
 from KidneyStoneClassification.utils.common import read_yaml, create_directories
 from KidneyStoneClassification.entity.config_entity import DataIngestionConfig
-from KidneyStoneClassification.entity.config_entity import PrepareBaseModelConfig
+from KidneyStoneClassification.entity.config_entity import (PrepareBaseModelConfig, PreprocessingConfig)
 
 class ConfigurationManager:
     def __init__(
@@ -41,4 +41,19 @@ class ConfigurationManager:
         )
 
         return prepare_base_model_config
+    
+    def get_preprocessing_config(self) -> PreprocessingConfig:
+        config = self.config.preprocessing
+        
+        create_directories([config.root_dir])
+
+        preprocessing_config = PreprocessingConfig(
+            root_dir=Path(config.root_dir),
+            processed_data_path=Path(config.processed_data_path),
+            params_clahe_clip=self.params.CLAHE_CLIP,
+            params_denoise_strength=self.params.DENOISE_STRENGTH,
+            params_intensity_rescale=self.params.INTENSITY_RESCALE
+        )
+
+        return preprocessing_config
     

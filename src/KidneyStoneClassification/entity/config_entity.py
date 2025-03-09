@@ -16,5 +16,13 @@ class PrepareBaseModelConfig:
     params_image_size: int
     params_learning_rate: float
     params_include_top: bool
-    params_weight: str
+    params_weights: str
     params_classes:int
+
+@dataclass(frozen=True)
+class PreprocessingConfig:
+    root_dir: Path
+    processed_data_path: Path
+    params_clahe_clip: float
+    params_denoise_strength: float
+    params_intensity_rescale: bool
